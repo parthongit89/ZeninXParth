@@ -56,17 +56,42 @@ const btnSignOut = document.getElementById("btn-sign-out");
 const mobileNavToggle = document.getElementById("mobile-nav-toggle");
 const sidebar = document.querySelector(".sidebar");
 
+// Global Toast System
+export function showToast(message) {
+  let container = document.getElementById("cyber-toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "cyber-toast-container";
+    container.className = "cyber-toast-container";
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement("div");
+  toast.className = "cyber-toast";
+  toast.innerHTML = `
+    <span class="toast-dot"></span>
+    <span class="toast-msg">${message}</span>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("fade-out");
+    setTimeout(() => toast.remove(), 400);
+  }, 3500);
+}
+window.showToast = showToast;
+
 // Initialize Application
 function initApp() {
   renderExploreCards(gamesData);
-  renderMarketplace();
-  renderUpcoming();
+  renderMarketplaceCards();
+  renderUpcomingCards();
   setupNavigation();
   setupSearch();
   setupRatings();
   setupComments();
   setupAuth();
   setupMobileToggle();
+  setupSubmissionForm();
+  setupContactForm();
 }
 
 // --------------------------------------------------------------------------
@@ -85,6 +110,12 @@ function setupNavigation() {
       navigateTo("explore");
     });
   }
+
+  // Brand logo click returns to explore
+  const brandLogos = document.querySelectorAll(".brand-container, .top-center-emblem");
+  brandLogos.forEach((el) => {
+    el.addEventListener("click", () => navigateTo("explore"));
+  });
 }
 
 export function navigateTo(viewName) {
@@ -114,26 +145,18 @@ export function navigateTo(viewName) {
   });
 
   // Show target view
-  if (viewName === "explore" && viewExplore) {
-    viewExplore.classList.add("active-view");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (viewName === "game-detail" && viewGameDetail) {
-    viewGameDetail.classList.add("active-view");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (viewName === "marketplace" && viewMarketplace) {
-    viewMarketplace.classList.add("active-view");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (viewName === "newgame" && viewNewGame) {
-    viewNewGame.classList.add("active-view");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (viewName === "contact" && viewContact) {
-    viewContact.classList.add("active-view");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (viewName === "about" && viewAbout) {
-    viewAbout.classList.add("active-view");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else if (viewName === "upcoming" && viewUpcoming) {
-    viewUpcoming.classList.add("active-view");
+  const targetMap = {
+    "explore": viewExplore,
+    "game-detail": viewGameDetail,
+    "marketplace": viewMarketplace,
+    "newgame": viewNewGame,
+    "contact": viewContact,
+    "about": viewAbout,
+    "upcoming": viewUpcoming
+  };
+
+  if (targetMap[viewName]) {
+    targetMap[viewName].classList.add("active-view");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -142,9 +165,10 @@ export function navigateTo(viewName) {
     sidebar.classList.remove("open");
   }
 }
+window.navigateTo = navigateTo;
 
 // --------------------------------------------------------------------------
-// Render View 1: Explore Latest Release Cards
+// Render View 1: Explore Latest Release Cards (Figma Frame 1)
 // --------------------------------------------------------------------------
 function renderExploreCards(games) {
   if (!gamesGrid) return;
@@ -167,7 +191,8 @@ function renderExploreCards(games) {
     const tagsHtml = game.tags.map((t) => `<span>${t}</span>`).join(" ");
 
     card.innerHTML = `
-      <div class="card-image-wrap">
+      <div class="card-image-wrap" style="cursor: pointer;">
+        <span class="card-status-badge">LIVE RELEASE</span>
         <img src="${game.cardImage}" alt="${game.title}" class="card-image" loading="lazy" />
       </div>
       <div class="card-body">
@@ -195,23 +220,18 @@ function renderExploreCards(games) {
 
     // Click on "Get" button opens detail view
     const getBtn = card.querySelector(".btn-get");
-    getBtn.addEventListener("click", () => {
-      openGameDetail(game.id);
-    });
+    getBtn.addEventListener("click", () => openGameDetail(game.id));
 
-    // Click on cover image also opens detail view
+    // Click on cover image opens detail view
     const imgWrap = card.querySelector(".card-image-wrap");
-    imgWrap.style.cursor = "pointer";
-    imgWrap.addEventListener("click", () => {
-      openGameDetail(game.id);
-    });
+    imgWrap.addEventListener("click", () => openGameDetail(game.id));
 
     gamesGrid.appendChild(card);
   });
 }
 
 // --------------------------------------------------------------------------
-// Render View 2: Game Detail Page
+// Render View 2: Game Detail Page (Figma Frame 2)
 // --------------------------------------------------------------------------
 export function openGameDetail(gameId) {
   const game = gamesData.find((g) => g.id === gameId);
@@ -220,9 +240,7 @@ export function openGameDetail(gameId) {
   currentGameId = gameId;
 
   // Set Back Navigation Title
-  if (detailBackTitle) {
-    detailBackTitle.textContent = game.title;
-  }
+  if (detailBackTitle) detailBackTitle.textContent = game.title;
 
   // Set Hero Banner
   if (detailBanner) {
@@ -241,11 +259,9 @@ export function openGameDetail(gameId) {
   }
 
   // Set About Description
-  if (detailAbout) {
-    detailAbout.textContent = game.about;
-  }
+  if (detailAbout) detailAbout.textContent = game.about;
 
-  // Set Feature Highlights from README
+  // Set Features List
   if (detailFeaturesList) {
     detailFeaturesList.innerHTML = game.features.map((f) => `<li>${f}</li>`).join("");
   }
@@ -261,19 +277,104 @@ export function openGameDetail(gameId) {
   }
 
   // Set Release Link Cards
-  if (detailGithubLink) {
-    detailGithubLink.href = game.links.github;
-  }
-  if (detailItchLink) {
-    detailItchLink.href = game.links.itch;
-  }
+  if (detailGithubLink) detailGithubLink.href = game.links.github;
+  if (detailItchLink) detailItchLink.href = game.links.itch;
 
-  // Refresh Ratings & Comments for this game
+  // Refresh Ratings & Comments
   loadGameRating(gameId);
   loadGameComments(gameId);
 
-  // Navigate to Detail View
+  // Navigate
   navigateTo("game-detail");
+}
+window.openGameDetail = openGameDetail;
+
+// --------------------------------------------------------------------------
+// Render Market Place Cards (Same Unified Gaming Card Theme)
+// --------------------------------------------------------------------------
+function renderMarketplaceCards() {
+  const container = document.getElementById("marketplace-grid");
+  if (!container) return;
+  container.innerHTML = "";
+
+  marketplaceItems.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "game-card";
+
+    const tagsHtml = item.tags.map((t) => `<span>${t}</span>`).join(" ");
+
+    card.innerHTML = `
+      <div class="card-image-wrap">
+        <span class="card-status-badge">${item.badge}</span>
+        <img src="${item.image}" alt="${item.title}" class="card-image" loading="lazy" />
+      </div>
+      <div class="card-body">
+        <span style="font-size: 13px; color: var(--accent-red); font-weight: 700; text-transform: uppercase;">${item.category}</span>
+        <h3 class="card-title" style="margin-top: 4px;">${item.title}</h3>
+        <p class="card-desc">${item.description}</p>
+      </div>
+      <div class="card-tags">
+        ${tagsHtml}
+      </div>
+      <button class="btn-get" onclick="showToast('Asset Pack &quot;${item.title}&quot; acquired! Added to your game inventory.')">
+        Acquire &bull; ${item.price}
+      </button>
+      <div class="card-platform-badges">
+        <div class="badge-item" title="Ghostofzenin Verified">
+          <img src="images/image 6.png" alt="Ghostofzenin" onerror="this.src='images/image 1.png'" />
+        </div>
+        <div class="badge-item" title="itch.io Ready">
+          <img src="images/image 7.png" alt="itch.io" onerror="this.src='images/image 4.png'" />
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// --------------------------------------------------------------------------
+// Render Upcoming Games Cards (Same Unified Gaming Card Theme)
+// --------------------------------------------------------------------------
+function renderUpcomingCards() {
+  const container = document.getElementById("upcoming-grid");
+  if (!container) return;
+  container.innerHTML = "";
+
+  upcomingGames.forEach((game) => {
+    const card = document.createElement("article");
+    card.className = "game-card";
+
+    const tagsHtml = game.tags.map((t) => `<span>${t}</span>`).join(" ");
+
+    card.innerHTML = `
+      <div class="card-image-wrap">
+        <span class="card-status-badge">${game.status}</span>
+        <img src="${game.image}" alt="${game.title}" class="card-image" loading="lazy" />
+      </div>
+      <div class="card-body">
+        <span style="font-size: 13px; color: var(--accent-red); font-weight: 700;">ETA: ${game.eta}</span>
+        <h3 class="card-title" style="margin-top: 4px;">${game.title}</h3>
+        <p class="card-desc">${game.description}</p>
+      </div>
+      <div class="card-tags">
+        ${tagsHtml}
+      </div>
+      <button class="btn-get" onclick="showToast('Subscribed! You will receive launch alerts for ${game.title}.')">
+        Pre-Register Now
+      </button>
+      <div class="card-platform-badges">
+        <div class="badge-item" title="Ghostofzenin Next-Gen">
+          <img src="images/image 6.png" alt="Ghostofzenin" onerror="this.src='images/image 1.png'" />
+        </div>
+        <div class="badge-item" title="Multiplatform">
+          <img src="images/image 8.png" alt="Render" onerror="this.src='images/image 1.png'" />
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
 }
 
 // --------------------------------------------------------------------------
@@ -323,12 +424,10 @@ function setupRatings() {
 
     btn.addEventListener("click", () => {
       saveRating(currentGameId, i);
+      showToast(`Rating of ${i} / 5 stars recorded!`);
     });
 
-    btn.addEventListener("mouseenter", () => {
-      highlightStars(i);
-    });
-
+    btn.addEventListener("mouseenter", () => highlightStars(i));
     starsContainer.appendChild(btn);
   }
 
@@ -441,6 +540,7 @@ function handleAddComment() {
 
   commentInput.value = "";
   loadGameComments(currentGameId);
+  showToast("Comment transmitted successfully!");
 }
 
 function loadGameComments(gameId) {
@@ -486,6 +586,7 @@ function setupAuth() {
     btnSignIn.addEventListener("click", async () => {
       try {
         await loginWithGoogle();
+        showToast("Signed in via Google successfully!");
       } catch (err) {
         console.error("Login trigger failed:", err);
       }
@@ -495,6 +596,7 @@ function setupAuth() {
   if (btnSignOut) {
     btnSignOut.addEventListener("click", async () => {
       await logoutUser();
+      showToast("Signed out of session.");
     });
   }
 
@@ -514,47 +616,28 @@ function setupAuth() {
 }
 
 // --------------------------------------------------------------------------
-// Secondary Views Rendering
+// Submission & Contact Form Handlers
 // --------------------------------------------------------------------------
-function renderMarketplace() {
-  const container = document.getElementById("marketplace-grid");
-  if (!container) return;
+function setupSubmissionForm() {
+  const form = document.getElementById("submission-form");
+  if (!form) return;
 
-  container.innerHTML = marketplaceItems.map((item) => `
-    <div class="market-item-card">
-      <div class="market-img-wrap">
-        <img src="${item.image}" alt="${item.title}" />
-      </div>
-      <div>
-        <span style="font-size: 12px; color: var(--accent-red); font-weight: 600;">${item.category}</span>
-        <h4 style="font-size: 18px; margin: 4px 0 8px; color: var(--text-white);">${item.title}</h4>
-        <p style="font-size: 13px; color: var(--text-white-55);">${item.description}</p>
-      </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-        <span style="font-size: 16px; font-weight: 700; color: #10B981;">${item.price}</span>
-        <button class="btn-sidebar-auth" style="width: auto; padding: 6px 14px; font-size: 13px;" onclick="alert('Asset Pack acquired! Added to your game inventory.')">Acquire</button>
-      </div>
-    </div>
-  `).join("");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    showToast("Game build submitted! Our engineering team will review it within 24 hours.");
+    form.reset();
+  });
 }
 
-function renderUpcoming() {
-  const container = document.getElementById("upcoming-grid");
-  if (!container) return;
+function setupContactForm() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
 
-  container.innerHTML = upcomingGames.map((game) => `
-    <div class="market-item-card">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <span style="font-size: 12px; color: var(--accent-red); font-weight: 600;">${game.genre}</span>
-        <span style="font-size: 12px; color: #F59E0B; background: rgba(245, 158, 11, 0.1); padding: 3px 8px; border-radius: 4px;">${game.status}</span>
-      </div>
-      <h4 style="font-size: 22px; color: var(--text-white); margin-top: 6px;">${game.title}</h4>
-      <p style="font-size: 14px; color: var(--text-white-55); line-height: 1.5;">${game.description}</p>
-      <div style="margin-top: 10px; font-size: 13px; color: var(--text-white-35);">
-        Expected Release: <strong style="color: var(--text-white);">${game.eta}</strong>
-      </div>
-    </div>
-  `).join("");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    showToast("Transmission dispatched! We will reply to your flight console shortly.");
+    form.reset();
+  });
 }
 
 // --------------------------------------------------------------------------

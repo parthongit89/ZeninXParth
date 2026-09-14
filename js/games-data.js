@@ -83,29 +83,46 @@ export const marketplaceItems = [
   {
     id: "cyber-skin-pack",
     title: "Cyberpunk Neon Skin Pack",
-    category: "Skin Pack",
+    category: "SKIN PACK",
     game: "BlockRush 2048",
-    price: "Free",
+    price: "FREE",
+    badge: "POPULAR",
     image: "BLOCKRUSH_GAME_INFO/Rectangle 2.png",
-    description: "Exclusive glowing dark glassmorphism theme for 2048 tile sets with reactive particles."
+    tags: ["2048", "NEON", "THEME"],
+    description: "Exclusive glowing dark glassmorphism theme for 2048 tile sets with reactive particle trails."
   },
   {
     id: "space-cruiser-v2",
-    title: "Vortex Interceptor Ship Model",
-    category: "Spaceship Model",
+    title: "Vortex Interceptor Hull",
+    category: "SPACESHIP MODEL",
     game: "Meteor Space Dodge",
-    price: "Free",
+    price: "FREE",
+    badge: "LEGENDARY",
     image: "METEOR_DODGE_info/Rectangle 7.png",
-    description: "Aerodynamic high-mobility spaceship sprite sheet with animated thruster trails."
+    tags: ["SPACESHIP", "SPRITE", "VFX"],
+    description: "High-mobility interceptor sprite sheet with reactive engine glow and plasma exhaust effects."
   },
   {
     id: "retro-synth-ost",
-    title: "Arcade Retro Synthwave OST",
-    category: "Audio / SFX",
+    title: "Arcade Synthwave OST",
+    category: "AUDIO / SFX",
     game: "ZeninXParth Collective",
-    price: "Free",
+    price: "FREE",
+    badge: "EXCLUSIVE",
     image: "images/image 1.png",
-    description: "Full 8-track lossless synthesized game soundtrack and responsive UI sound kit."
+    tags: ["AUDIO", "SYNTH", "LOSSLESS"],
+    description: "Complete 8-track lossless synthesized game soundtrack and responsive UI sound kit."
+  },
+  {
+    id: "crt-shader-pack",
+    title: "Retro CRT Shader Overlay",
+    category: "VISUAL FX",
+    game: "All Releases",
+    price: "FREE",
+    badge: "NEW",
+    image: "BLOCKRUSH_GAME_INFO/Untitled design (1) 1.png",
+    tags: ["SHADER", "RETRO", "ARCADE"],
+    description: "Scanline distortion and chromatic aberration filters built for Pygame and WebGL canvas."
   }
 ];
 
@@ -115,7 +132,9 @@ export const upcomingGames = [
     title: "Neon Drift: Cyber Odyssey",
     genre: "CYBER RACING / ACTION",
     eta: "Q4 2026",
-    status: "In Development",
+    status: "IN DEVELOPMENT",
+    image: "METEOR_DODGE_info/Untitled design (2).png",
+    tags: ["RACING", "SYNTHWAVE", "DRIFT"],
     description: "High-speed synthwave physics racer with multiplayer drift rooms and modular vehicle tuning."
   },
   {
@@ -123,7 +142,9 @@ export const upcomingGames = [
     title: "Quantum Forge",
     genre: "TACTICAL PUZZLE / ROGUELITE",
     eta: "Q1 2027",
-    status: "Prototyping",
+    status: "PROTOTYPING",
+    image: "BLOCKRUSH_GAME_INFO/Untitled design (1) 1.png",
+    tags: ["PUZZLE", "QUANTUM", "STRATEGY"],
     description: "Turn-based quantum computation puzzle game pitting human intuition against recursive AI grids."
   }
 ];

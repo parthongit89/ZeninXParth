@@ -23,7 +23,7 @@
          ==================================================================== -->
     <aside class="sidebar">
       <!-- Brand Logo -->
-      <div class="brand-container">
+      <div class="brand-container" title="ZeninXParth Home">
         <img src="images/image 1.png" alt="Ghostofzenin" class="brand-logo-img" />
       </div>
 
@@ -90,7 +90,7 @@
 
         <button class="nav-item" data-view="upcoming">
           <span class="nav-icon">
-            <!-- Upcoming Games / Rocket / Cal Icon -->
+            <!-- Upcoming Games / Rocket Icon -->
             <svg viewBox="0 0 24 24">
               <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
               <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
@@ -162,7 +162,7 @@
 
           <!-- Header Action Icons (Filter & Notifications) -->
           <div class="header-actions">
-            <button class="action-icon-btn" title="Filter releases" onclick="alert('Filter mode: Latest Releases & Cyber-Arcade sorted by popularity.')">
+            <button class="action-icon-btn" title="Filter releases" onclick="showToast('Filtering active: Sorted by latest release & community rating.')">
               <svg viewBox="0 0 24 24">
                 <line x1="4" y1="21" x2="4" y2="14" />
                 <line x1="4" y1="10" x2="4" y2="3" />
@@ -176,7 +176,7 @@
               </svg>
             </button>
 
-            <button class="action-icon-btn" title="Notifications" onclick="alert('Notifications: BlockRush 2048 and Meteor Space Dodge are live on Render & itch.io!')">
+            <button class="action-icon-btn" title="Notifications" onclick="showToast('Alert: BlockRush 2048 and Meteor Space Dodge are live on Render & itch.io!')">
               <span class="notification-badge-dot"></span>
               <svg viewBox="0 0 24 24">
                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -376,17 +376,17 @@
       </section>
 
       <!-- ================================================================
-           VIEW: MARKET PLACE
+           VIEW: MARKET PLACE (Unified Gaming Cards Theme)
            ================================================================ -->
       <section id="view-marketplace" class="view-container">
         <div class="section-header-row">
           <h1 class="section-title">Market Place</h1>
         </div>
-        <p style="color: var(--text-white-55); margin-bottom: 28px;">
-          Explore and acquire exclusive themes, cyber skins, spaceship hulls, and synthwave soundtrack packages for ZeninXParth titles.
+        <p class="section-subtitle">
+          Acquire exclusive cyberpunk themes, spaceship hulls, and synthwave soundtrack packages crafted for ZeninXParth releases.
         </p>
-        <div id="marketplace-grid" class="secondary-grid">
-          <!-- Populated by js/app.js -->
+        <div id="marketplace-grid" class="games-cards-grid">
+          <!-- Dynamically populated with identical gaming card theme -->
         </div>
       </section>
 
@@ -395,103 +395,223 @@
            ================================================================ -->
       <section id="view-newgame" class="view-container">
         <div class="section-header-row">
-          <h1 class="section-title">Submit New Game</h1>
+          <h1 class="section-title">Developer Launchpad</h1>
         </div>
-        <div class="contact-form-card">
-          <p style="color: var(--text-white-85); font-size: 15px;">
-            Are you an indie game developer? Publish your Pygame, WebGL, or Python titles directly to the <strong>ZeninXParth</strong> cyber-arcade network.
-          </p>
-          <div class="form-group">
-            <label>Game Title</label>
-            <input type="text" class="form-input" placeholder="e.g. CyberStrike 2088" />
+        <p class="section-subtitle">
+          Publish your Pygame, WebGL, or Python titles directly to the <strong>ZeninXParth</strong> cyber-arcade network.
+        </p>
+
+        <div class="dev-console-layout">
+          <form id="submission-form" class="contact-form-card">
+            <div class="form-group">
+              <label>Game Title</label>
+              <input type="text" class="form-input" placeholder="e.g. CyberStrike 2088" required />
+            </div>
+            <div class="form-group">
+              <label>Genre & Tags (Comma Separated)</label>
+              <input type="text" class="form-input" placeholder="e.g. PUZZLE, ARCADE, ROGUELIKE" required />
+            </div>
+            <div class="form-group">
+              <label>Target Engine</label>
+              <select class="form-select">
+                <option value="pygame">Python 3.11 / Pygame Engine</option>
+                <option value="webgl">WebGL / HTML5 Canvas</option>
+                <option value="flask">Flask WSGI Cloud REST Service</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>GitHub Repository / Playable Build URL</label>
+              <input type="url" class="form-input" placeholder="https://github.com/yourhandle/game-repo" required />
+            </div>
+            <div class="form-group">
+              <label>Game Overview & Physics Specifications</label>
+              <textarea class="form-textarea" placeholder="Detail your frame rate loop, collision mechanics, and leaderboard cloud integration..." required></textarea>
+            </div>
+            <button type="submit" class="btn-get" style="margin-bottom: 0;">
+              Transmit Build for Verification
+            </button>
+          </form>
+
+          <!-- Developer Info Card -->
+          <div class="game-card">
+            <div class="card-image-wrap">
+              <span class="card-status-badge">DEVELOPER SDK</span>
+              <img src="BLOCKRUSH_GAME_INFO/Rectangle 2.png" alt="SDK Overview" class="card-image" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Integration Guidelines</h3>
+              <p class="card-desc">
+                Every release on ZeninXParth includes Neon PostgreSQL cloud sync, Google Firebase profile management, and 60 FPS performance profiling.
+              </p>
+            </div>
+            <div class="card-tags">
+              <span>SDK</span> <span>REST API</span> <span>NEON DB</span>
+            </div>
+            <button class="btn-get" onclick="showToast('Developer Starter Kit downloaded.')">
+              Download Dev SDK
+            </button>
           </div>
-          <div class="form-group">
-            <label>Genre / Tags</label>
-            <input type="text" class="form-input" placeholder="e.g. PUZZLE, ARCADE, ROGUELIKE" />
-          </div>
-          <div class="form-group">
-            <label>GitHub Repository / Playable URL</label>
-            <input type="url" class="form-input" placeholder="https://github.com/yourhandle/game-repo" />
-          </div>
-          <div class="form-group">
-            <label>Brief Pitch & Engine Specifications</label>
-            <textarea class="form-textarea" placeholder="Tell us about the physics, engine, and cloud score integration..."></textarea>
-          </div>
-          <button class="btn-sidebar-auth" onclick="alert('Submission submitted! The ZeninXParth team will review your game build.')">Submit Game for Release</button>
         </div>
       </section>
 
       <!-- ================================================================
-           VIEW: CONTACT US
+           VIEW: CONTACT US (Transmission Terminal)
            ================================================================ -->
       <section id="view-contact" class="view-container">
         <div class="section-header-row">
           <h1 class="section-title">Contact Us</h1>
         </div>
-        <div class="contact-form-card">
-          <p style="color: var(--text-white-55);">
-            Have inquiries, partnership requests, or feedback regarding game releases? Reach out to the ZeninXParth engineering team.
-          </p>
-          <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" class="form-input" placeholder="Pilot Name" />
+        <p class="section-subtitle">
+          Have inquiries, partnership requests, or feedback regarding game releases? Reach out to the ZeninXParth collective.
+        </p>
+
+        <div class="dev-console-layout">
+          <form id="contact-form" class="contact-form-card">
+            <div class="form-group">
+              <label>Your Pilot Call-Sign / Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Commander Zane" required />
+            </div>
+            <div class="form-group">
+              <label>Communication Frequency / Email</label>
+              <input type="email" class="form-input" placeholder="pilot@domain.com" required />
+            </div>
+            <div class="form-group">
+              <label>Inquiry Category</label>
+              <select class="form-select">
+                <option value="general">General Inquiries & Community</option>
+                <option value="partnership">Game Distribution & Publishing</option>
+                <option value="bug">Engine Bug Report / Feedback</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Encrypted Transmission / Message</label>
+              <textarea class="form-textarea" placeholder="Type your dispatch here..." required></textarea>
+            </div>
+            <button type="submit" class="btn-get" style="margin-bottom: 0;">
+              Transmit Message
+            </button>
+          </form>
+
+          <!-- Direct Channels Card -->
+          <div class="game-card">
+            <div class="card-image-wrap">
+              <span class="card-status-badge">DIRECT CHANNELS</span>
+              <img src="images/image 1.png" alt="Ghostofzenin Channels" class="card-image" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Direct Studio Links</h3>
+              <p class="card-desc">
+                Connect directly with Harshal Sonawane and Parth Sonavane across our official code repositories and game portals.
+              </p>
+            </div>
+            <div class="card-tags">
+              <span>GITHUB</span> <span>ITCH.IO</span> <span>RENDER</span>
+            </div>
+            <a href="https://github.com/Ghostofzenin08" target="_blank" class="btn-get" style="text-decoration: none;">
+              Visit Ghostofzenin08
+            </a>
+            <a href="https://github.com/parthongit89" target="_blank" class="btn-get" style="background: transparent; border: 1.5px solid var(--accent-red); text-decoration: none;">
+              Visit Parthongit89
+            </a>
           </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" class="form-input" placeholder="pilot@domain.com" />
-          </div>
-          <div class="form-group">
-            <label>Message / Inquiries</label>
-            <textarea class="form-textarea" placeholder="Write your message here..."></textarea>
-          </div>
-          <button class="btn-sidebar-auth" onclick="alert('Message transmitted successfully. We will be in touch shortly!')">Transmit Message</button>
         </div>
       </section>
 
       <!-- ================================================================
-           VIEW: ABOUT US (Prompt Engineering & Architecture Specs)
+           VIEW: ABOUT US (Studio Story, Specs & Team)
            ================================================================ -->
       <section id="view-about" class="view-container">
         <div class="section-header-row">
           <h1 class="section-title">About ZeninXParth</h1>
         </div>
-        <div class="about-us-container">
-          <div class="about-card">
-            <h3>Vision & Origins</h3>
-            <p>
-              <strong>ZeninXParth</strong> represents the joint engineering synergy between <strong>Ghostofzenin08 (Harshal Sonawane)</strong> and <strong>Parthongit89 (Parth Sonavane)</strong>. Combining high-performance Python/Pygame game loops with cutting-edge web engineering, cloud score persistence on Neon PostgreSQL, and real-time Google Firebase Authentication.
-            </p>
-          </div>
+        <p class="section-subtitle">
+          The collaborative indie engineering initiative merging high-performance game loops with serverless cloud architectures.
+        </p>
 
-          <div class="about-card">
-            <h3>Full-Stack Prompt Engineering Strategy</h3>
-            <p>
-              Architected in accordance with our standardized prompt-engineering framework (<a href="https://github.com/parthongit89/Project-Strategies-Prompt-engineering-" target="_blank" style="color: var(--accent-red); text-decoration: underline;">Project-Strategies-Prompt-engineering-</a>). Every system balances lightweight client efficiency, robust serverless backend scaling, and pixel-true aesthetic execution.
-            </p>
+        <!-- Studio Stats Bar -->
+        <div class="about-stats-bar">
+          <div class="about-stat-box">
+            <span class="about-stat-num">60 FPS</span>
+            <span class="about-stat-lbl">Deterministic Game Loop</span>
           </div>
+          <div class="about-stat-box">
+            <span class="about-stat-num">Neon DB</span>
+            <span class="about-stat-lbl">Serverless PostgreSQL Cloud</span>
+          </div>
+          <div class="about-stat-box">
+            <span class="about-stat-num">Firebase</span>
+            <span class="about-stat-lbl">Google OAuth Authentication</span>
+          </div>
+          <div class="about-stat-box">
+            <span class="about-stat-num">Zero</span>
+            <span class="about-stat-lbl">Client Build Overhead</span>
+          </div>
+        </div>
 
-          <div class="about-card">
-            <h3>Core Technology Ecosystem</h3>
-            <p>
-              • <strong>Engines</strong>: Python 3.11, Pygame, Vanilla ES6+ WebGL / HTML5<br />
-              • <strong>Backends</strong>: Flask 3.0 WSGI, Gunicorn, Flask-CORS, SQLAlchemy<br />
-              • <strong>Database & Cloud</strong>: Neon Serverless PostgreSQL, Render Production Hosting, itch.io Web Bundles<br />
-              • <strong>Auth & Security</strong>: Google Firebase Authentication v10+ with OAuth & JWT verification<br />
-              • <strong>Design System</strong>: Instrument Sans typography, deep-black cyberpunk glassmorphism, responsive CSS variables
-            </p>
-          </div>
+        <!-- Studio Cards Grid -->
+        <div class="games-cards-grid" style="margin-bottom: 40px;">
+          <!-- Dev 1 Card -->
+          <article class="game-card">
+            <div class="card-image-wrap">
+              <span class="card-status-badge">FOUNDER & DEV</span>
+              <img src="BLOCKRUSH_GAME_INFO/Rectangle 2.png" alt="Harshal Sonawane" class="card-image" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Harshal Sonawane</h3>
+              <p class="card-desc">
+                <strong>@Ghostofzenin08</strong> &bull; Lead Game Architect, Physics Engine Specialist, Graphics & Asset Pipeline Designer.
+              </p>
+            </div>
+            <div class="card-tags">
+              <span>GAME DEV</span> <span>GRAPHICS</span> <span>LOGISTICS</span>
+            </div>
+            <a href="https://github.com/Ghostofzenin08" target="_blank" class="btn-get">
+              Explore GitHub Repository
+            </a>
+          </article>
+
+          <!-- Dev 2 Card -->
+          <article class="game-card">
+            <div class="card-image-wrap">
+              <span class="card-status-badge">CO-FOUNDER & DEV</span>
+              <img src="METEOR_DODGE_info/Rectangle 7.png" alt="Parth Sonavane" class="card-image" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Parth Sonavane</h3>
+              <p class="card-desc">
+                <strong>@parthongit89</strong> &bull; Full-Stack Architect, Cloud Deployment Specialist, REST WSGI Backend & Frontend Lead.
+              </p>
+            </div>
+            <div class="card-tags">
+              <span>FRONTEND</span> <span>BACKEND</span> <span>DEPLOYMENT</span>
+            </div>
+            <a href="https://github.com/parthongit89" target="_blank" class="btn-get">
+              Explore GitHub Repository
+            </a>
+          </article>
+        </div>
+
+        <!-- Architectural Overview Card -->
+        <div class="contact-form-card" style="max-width: 100%;">
+          <h3 style="font-size: 24px; color: var(--accent-red); margin-bottom: 8px;">Prompt Engineering & Architectural Standard</h3>
+          <p style="color: var(--text-white-85); line-height: 1.6; font-size: 15px;">
+            Standardized per the <a href="https://github.com/parthongit89/Project-Strategies-Prompt-engineering-" target="_blank" style="color: var(--accent-red); font-weight: 600; text-decoration: underline;">Full Stack Prompt Engineering Specification</a>. Every game release utilizes dual platform distribution: instant in-browser WebGL client with cloud sync, accompanied by standalone high-performance compiled Windows executables.
+          </p>
         </div>
       </section>
 
       <!-- ================================================================
-           VIEW: UPCOMING GAMES
+           VIEW: UPCOMING GAMES (Unified Gaming Cards Theme)
            ================================================================ -->
       <section id="view-upcoming" class="view-container">
         <div class="section-header-row">
           <h1 class="section-title">Upcoming Games</h1>
         </div>
-        <div id="upcoming-grid" class="secondary-grid">
-          <!-- Populated by js/app.js -->
+        <p class="section-subtitle">
+          Next-generation indie titles currently in development at ZeninXParth labs. Pre-register for priority beta access.
+        </p>
+        <div id="upcoming-grid" class="games-cards-grid">
+          <!-- Dynamically populated with identical gaming card theme -->
         </div>
       </section>
 

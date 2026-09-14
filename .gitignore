@@ -1,0 +1,12 @@
+# Environment configuration
+.env
+.env.local
+js/env.js
+
+# System & OS files
+Thumbs.db
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/

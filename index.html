@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZeninXParth | Cyber-Arcade & Game Development Lab</title>
+  
+  <!-- Instrument Sans Font & Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="images/image 6.png" />
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- ====================================================================
+         SIDEBAR NAVIGATION (Figma: Width 330px, Red Divider)
+         ==================================================================== -->
+    <aside class="sidebar">
+      <!-- Brand Logo -->
+      <div class="brand-container">
+        <img src="images/image 1.png" alt="Ghostofzenin" class="brand-logo-img" />
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="explore">
+          <span class="nav-icon">
+            <!-- Explore / Compass Icon -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+            </svg>
+          </span>
+          <span>Explore</span>
+        </button>
+
+        <button class="nav-item" data-view="marketplace">
+          <span class="nav-icon">
+            <!-- Market Place / Store Icon -->
+            <svg viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </span>
+          <span>Market Place</span>
+        </button>
+
+        <button class="nav-item" data-view="newgame">
+          <span class="nav-icon">
+            <!-- Game Controller / D-Pad Icon -->
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="6" width="20" height="12" rx="6" />
+              <line x1="6" y1="12" x2="10" y2="12" />
+              <line x1="8" y1="10" x2="8" y2="14" />
+              <circle cx="15" cy="11" r="1" />
+              <circle cx="18" cy="13" r="1" />
+            </svg>
+          </span>
+          <span>New Game</span>
+        </button>
+
+        <button class="nav-item" data-view="contact">
+          <span class="nav-icon">
+            <!-- Contact Us / At Mail Icon -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94" />
+            </svg>
+          </span>
+          <span>Contact Us</span>
+        </button>
+
+        <button class="nav-item" data-view="about">
+          <span class="nav-icon">
+            <!-- About Us / Info Icon -->
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </span>
+          <span>About Us</span>
+        </button>
+
+        <button class="nav-item" data-view="upcoming">
+          <span class="nav-icon">
+            <!-- Upcoming Games / Rocket / Cal Icon -->
+            <svg viewBox="0 0 24 24">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+              <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            </svg>
+          </span>
+          <span>Upcoming Games</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Google Auth & Pilot Session HUD -->
+      <div class="sidebar-footer">
+        <div id="auth-card" class="auth-card" style="display: none;">
+          <img id="auth-avatar" src="" alt="User Avatar" class="auth-avatar" />
+          <div class="auth-info">
+            <span id="auth-name" class="auth-name">Pilot</span>
+            <span class="auth-status">Google Verified</span>
+          </div>
+        </div>
+
+        <button id="btn-sign-in" class="btn-sidebar-auth">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+          </svg>
+          Sign in with Google
+        </button>
+
+        <button id="btn-sign-out" class="btn-sidebar-auth secondary" style="display: none;">
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         MAIN CONTENT AREA
+         ==================================================================== -->
+    <main class="main-content">
+      
+      <!-- Top Header (Ghostofzenin Emblem, Search Bar, Quick Actions) -->
+      <header class="top-header">
+        <div class="top-center-brand">
+          <img src="images/image 6.png" alt="Ghostofzenin Emblem" class="top-center-emblem" onerror="this.src='images/image 1.png'" />
+        </div>
+
+        <div class="search-and-actions-bar">
+          <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation">
+            <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          <!-- Search Input (Figma Node 757:93: #ff0207 border, 10px radius) -->
+          <div class="search-container">
+            <svg class="search-icon-inside" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input 
+              type="text" 
+              id="search-input" 
+              class="search-input" 
+              placeholder="Search Game" 
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Header Action Icons (Filter & Notifications) -->
+          <div class="header-actions">
+            <button class="action-icon-btn" title="Filter releases" onclick="alert('Filter mode: Latest Releases & Cyber-Arcade sorted by popularity.')">
+              <svg viewBox="0 0 24 24">
+                <line x1="4" y1="21" x2="4" y2="14" />
+                <line x1="4" y1="10" x2="4" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12" y2="3" />
+                <line x1="20" y1="21" x2="20" y2="16" />
+                <line x1="20" y1="12" x2="20" y2="3" />
+                <line x1="1" y1="14" x2="7" y2="14" />
+                <line x1="9" y1="8" x2="15" y2="8" />
+                <line x1="17" y1="16" x2="23" y2="16" />
+              </svg>
+            </button>
+
+            <button class="action-icon-btn" title="Notifications" onclick="alert('Notifications: BlockRush 2048 and Meteor Space Dodge are live on Render & itch.io!')">
+              <span class="notification-badge-dot"></span>
+              <svg viewBox="0 0 24 24">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- ================================================================
+           VIEW 1: EXPLORE / LATEST RELEASE (Figma Frame 1 / Node 750:3)
+           ================================================================ -->
+      <section id="view-explore" class="view-container active-view">
+        <div class="section-header-row">
+          <h1 class="section-title">Latest Release</h1>
+        </div>
+
+        <!-- Interactive Cards Grid for Games -->
+        <div id="games-grid" class="games-cards-grid">
+          <!-- Populated by js/app.js -->
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW 2: GAME DETAIL PAGE (Figma Frame 2 / Node 761:211)
+           ================================================================ -->
+      <section id="view-game-detail" class="view-container game-detail-view">
+        
+        <!-- Back Navigation Header -->
+        <div id="detail-back-btn" class="detail-back-header">
+          <svg class="detail-back-icon" viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          <span id="detail-back-title">BlockRush</span>
+        </div>
+
+        <!-- Wide Hero Banner -->
+        <div class="detail-hero-banner">
+          <img id="detail-banner-img" src="BLOCKRUSH_GAME_INFO/Untitled design (1) 1.png" alt="Game Banner" class="detail-banner-img" />
+        </div>
+
+        <!-- Downloads / Views / Ratings Counters -->
+        <div class="detail-stats-bar">
+          <div class="stat-item">
+            <span class="stat-label">Downloads</span>
+            <span id="stat-downloads-val" class="stat-value">--</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Views</span>
+            <span id="stat-views-val" class="stat-value">--</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Ratings</span>
+            <span id="stat-ratings-val" class="stat-value">--</span>
+          </div>
+        </div>
+
+        <!-- About Game Section -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">About Game</h2>
+          <div id="detail-tags" class="detail-tags-row">
+            <span>PUZZLE</span> &nbsp; <span>BLOCK GAME</span> &nbsp; <span>MATH</span>
+          </div>
+          <p id="detail-about" class="detail-description-text">
+            BlockRush 2048 reimagines the classic mathematical sliding tile puzzle into an exhilarating, competitive cyber-arcade experience.
+          </p>
+
+          <!-- Key Features Highlights from README -->
+          <div class="game-features-box">
+            <h3 class="features-heading">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+              Key Architecture & Engine Features
+            </h3>
+            <ul id="detail-features-list" class="features-list">
+              <!-- Dynamically populated from README -->
+            </ul>
+          </div>
+
+          <!-- Action Buttons: Download & Play on Browser -->
+          <div class="detail-action-buttons">
+            <a id="detail-download-btn" href="#" target="_blank" class="btn-detail-action">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download
+            </a>
+
+            <a id="detail-play-btn" href="#" target="_blank" class="btn-detail-action">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              Play on Browser
+            </a>
+          </div>
+        </div>
+
+        <!-- Releases Section -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Releases</h2>
+          <div class="releases-cards-row">
+            <a id="detail-github-link" href="https://github.com/Ghostofzenin08/BlockRush_2048" target="_blank" class="release-card">
+              <div class="release-icon-wrap">
+                <img src="images/GITHUB ICON 1.png" alt="Github" />
+              </div>
+              <div class="release-info">
+                <span class="release-name">Github</span>
+                <span class="release-date">14 Sept 2026</span>
+              </div>
+            </a>
+
+            <a id="detail-itch-link" href="https://zeninxparth.itch.io/blockrush-2048" target="_blank" class="release-card">
+              <div class="release-icon-wrap">
+                <img src="images/image 4.png" alt="itch.io" />
+              </div>
+              <div class="release-info">
+                <span class="release-name">itch.io</span>
+                <span class="release-date">14 Sept 2026</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Developers Section -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Developers</h2>
+          <div class="dev-team-name">ZeninXParth Teams</div>
+
+          <!-- Harshal Sonawane -->
+          <div class="dev-member-entry">
+            <div class="dev-name">
+              <a href="https://github.com/Ghostofzenin08" target="_blank">
+                Ghostofzenin08 - Harshal Sonawane
+              </a>
+            </div>
+            <div class="dev-roles-badges">
+              <span class="role-badge">Game Developer</span>
+              <span class="role-badge">Game Graphics</span>
+              <span class="role-badge">Game Logistic</span>
+              <span class="role-badge">Game Analytics</span>
+            </div>
+          </div>
+
+          <!-- Parth Sonavane -->
+          <div class="dev-member-entry">
+            <div class="dev-name">
+              <a href="https://github.com/parthongit89" target="_blank">
+                Parthongit89 - Parth Sonavane
+              </a>
+            </div>
+            <div class="dev-roles-badges">
+              <span class="role-badge">Frontend Developer</span>
+              <span class="role-badge">Backend Developer</span>
+              <span class="role-badge">Deployment</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ratings Section (5 Interactive Stars) -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Ratings</h2>
+          <div id="ratings-stars-container" class="ratings-stars-row">
+            <!-- Rendered by js/app.js -->
+          </div>
+          <p id="ratings-feedback" class="ratings-feedback-text">Rate your satisfaction (1 to 5 stars)</p>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="detail-section">
+          <h2 class="detail-section-title">Comments</h2>
+          
+          <!-- Input Capsule (Figma Node 763:380 / 763:381) -->
+          <div class="comments-input-capsule">
+            <input 
+              type="text" 
+              id="comment-input" 
+              class="comments-field" 
+              placeholder="Comments , About game , Satisfaction" 
+            />
+            <button id="add-comment-btn" class="btn-add-comment">
+              Add Comments
+            </button>
+          </div>
+
+          <!-- Comments Feed -->
+          <div id="comments-feed" class="comments-feed">
+            <!-- Dynamic comments rendered by js/app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: MARKET PLACE
+           ================================================================ -->
+      <section id="view-marketplace" class="view-container">
+        <div class="section-header-row">
+          <h1 class="section-title">Market Place</h1>
+        </div>
+        <p style="color: var(--text-white-55); margin-bottom: 28px;">
+          Explore and acquire exclusive themes, cyber skins, spaceship hulls, and synthwave soundtrack packages for ZeninXParth titles.
+        </p>
+        <div id="marketplace-grid" class="secondary-grid">
+          <!-- Populated by js/app.js -->
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: NEW GAME (Developer Submission Portal)
+           ================================================================ -->
+      <section id="view-newgame" class="view-container">
+        <div class="section-header-row">
+          <h1 class="section-title">Submit New Game</h1>
+        </div>
+        <div class="contact-form-card">
+          <p style="color: var(--text-white-85); font-size: 15px;">
+            Are you an indie game developer? Publish your Pygame, WebGL, or Python titles directly to the <strong>ZeninXParth</strong> cyber-arcade network.
+          </p>
+          <div class="form-group">
+            <label>Game Title</label>
+            <input type="text" class="form-input" placeholder="e.g. CyberStrike 2088" />
+          </div>
+          <div class="form-group">
+            <label>Genre / Tags</label>
+            <input type="text" class="form-input" placeholder="e.g. PUZZLE, ARCADE, ROGUELIKE" />
+          </div>
+          <div class="form-group">
+            <label>GitHub Repository / Playable URL</label>
+            <input type="url" class="form-input" placeholder="https://github.com/yourhandle/game-repo" />
+          </div>
+          <div class="form-group">
+            <label>Brief Pitch & Engine Specifications</label>
+            <textarea class="form-textarea" placeholder="Tell us about the physics, engine, and cloud score integration..."></textarea>
+          </div>
+          <button class="btn-sidebar-auth" onclick="alert('Submission submitted! The ZeninXParth team will review your game build.')">Submit Game for Release</button>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: CONTACT US
+           ================================================================ -->
+      <section id="view-contact" class="view-container">
+        <div class="section-header-row">
+          <h1 class="section-title">Contact Us</h1>
+        </div>
+        <div class="contact-form-card">
+          <p style="color: var(--text-white-55);">
+            Have inquiries, partnership requests, or feedback regarding game releases? Reach out to the ZeninXParth engineering team.
+          </p>
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" class="form-input" placeholder="Pilot Name" />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-input" placeholder="pilot@domain.com" />
+          </div>
+          <div class="form-group">
+            <label>Message / Inquiries</label>
+            <textarea class="form-textarea" placeholder="Write your message here..."></textarea>
+          </div>
+          <button class="btn-sidebar-auth" onclick="alert('Message transmitted successfully. We will be in touch shortly!')">Transmit Message</button>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: ABOUT US (Prompt Engineering & Architecture Specs)
+           ================================================================ -->
+      <section id="view-about" class="view-container">
+        <div class="section-header-row">
+          <h1 class="section-title">About ZeninXParth</h1>
+        </div>
+        <div class="about-us-container">
+          <div class="about-card">
+            <h3>Vision & Origins</h3>
+            <p>
+              <strong>ZeninXParth</strong> represents the joint engineering synergy between <strong>Ghostofzenin08 (Harshal Sonawane)</strong> and <strong>Parthongit89 (Parth Sonavane)</strong>. Combining high-performance Python/Pygame game loops with cutting-edge web engineering, cloud score persistence on Neon PostgreSQL, and real-time Google Firebase Authentication.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <h3>Full-Stack Prompt Engineering Strategy</h3>
+            <p>
+              Architected in accordance with our standardized prompt-engineering framework (<a href="https://github.com/parthongit89/Project-Strategies-Prompt-engineering-" target="_blank" style="color: var(--accent-red); text-decoration: underline;">Project-Strategies-Prompt-engineering-</a>). Every system balances lightweight client efficiency, robust serverless backend scaling, and pixel-true aesthetic execution.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <h3>Core Technology Ecosystem</h3>
+            <p>
+              • <strong>Engines</strong>: Python 3.11, Pygame, Vanilla ES6+ WebGL / HTML5<br />
+              • <strong>Backends</strong>: Flask 3.0 WSGI, Gunicorn, Flask-CORS, SQLAlchemy<br />
+              • <strong>Database & Cloud</strong>: Neon Serverless PostgreSQL, Render Production Hosting, itch.io Web Bundles<br />
+              • <strong>Auth & Security</strong>: Google Firebase Authentication v10+ with OAuth & JWT verification<br />
+              • <strong>Design System</strong>: Instrument Sans typography, deep-black cyberpunk glassmorphism, responsive CSS variables
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: UPCOMING GAMES
+           ================================================================ -->
+      <section id="view-upcoming" class="view-container">
+        <div class="section-header-row">
+          <h1 class="section-title">Upcoming Games</h1>
+        </div>
+        <div id="upcoming-grid" class="secondary-grid">
+          <!-- Populated by js/app.js -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Main JavaScript Module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

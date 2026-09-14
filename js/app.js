@@ -16,7 +16,6 @@ let currentSearchTerm = "";
 const viewExplore = document.getElementById("view-explore");
 const viewGameDetail = document.getElementById("view-game-detail");
 const viewMarketplace = document.getElementById("view-marketplace");
-const viewNewGame = document.getElementById("view-newgame");
 const viewContact = document.getElementById("view-contact");
 const viewAbout = document.getElementById("view-about");
 const viewUpcoming = document.getElementById("view-upcoming");
@@ -90,7 +89,6 @@ export function initApp() {
   setupComments();
   setupAuth();
   setupMobileToggle();
-  setupSubmissionForm();
   setupContactForm();
   setupDownloadGateModal();
 }
@@ -134,7 +132,6 @@ export function navigateTo(viewName) {
     viewExplore, 
     viewGameDetail, 
     viewMarketplace, 
-    viewNewGame, 
     viewContact, 
     viewAbout, 
     viewUpcoming
@@ -147,7 +144,6 @@ export function navigateTo(viewName) {
     "explore": viewExplore,
     "game-detail": viewGameDetail,
     "marketplace": viewMarketplace,
-    "newgame": viewNewGame,
     "contact": viewContact,
     "about": viewAbout,
     "upcoming": viewUpcoming
@@ -667,19 +663,8 @@ function setupAuth() {
 }
 
 // --------------------------------------------------------------------------
-// Submission & Contact Form Handlers
+// Contact Form Handler
 // --------------------------------------------------------------------------
-function setupSubmissionForm() {
-  const form = document.getElementById("submission-form");
-  if (!form) return;
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    showToast("Game build submitted! Our engineering team will review it within 24 hours.");
-    form.reset();
-  });
-}
-
 function setupContactForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;

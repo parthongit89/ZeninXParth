@@ -49,7 +49,7 @@
           <span>Market Place</span>
         </button>
 
-        <button class="nav-item" data-view="newgame" onclick="navigateTo('newgame')">
+        <button class="nav-item" data-view="newgame" onclick="openGameDetail('blockrush')">
           <span class="nav-icon">
             <svg viewBox="0 0 24 24">
               <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -443,70 +443,6 @@
         </p>
         <div id="marketplace-grid" class="games-cards-grid">
           <!-- Dynamically populated -->
-        </div>
-      </section>
-
-      <!-- ================================================================
-           VIEW: NEW GAME
-           ================================================================ -->
-      <section id="view-newgame" class="view-container">
-        <div class="section-header-row">
-          <h1 class="section-title">Developer Launchpad</h1>
-        </div>
-        <p class="section-subtitle">
-          Publish your Pygame, WebGL, or Python titles directly to the <strong>ZeninXParth</strong> cyber-arcade network.
-        </p>
-
-        <div class="dev-console-layout">
-          <form id="submission-form" class="contact-form-card">
-            <div class="form-group">
-              <label>Game Title</label>
-              <input type="text" class="form-input" placeholder="e.g. CyberStrike 2088" required />
-            </div>
-            <div class="form-group">
-              <label>Genre & Tags (Comma Separated)</label>
-              <input type="text" class="form-input" placeholder="e.g. PUZZLE, ARCADE, ROGUELIKE" required />
-            </div>
-            <div class="form-group">
-              <label>Target Engine</label>
-              <select class="form-select">
-                <option value="pygame">Python 3.11 / Pygame Engine</option>
-                <option value="webgl">WebGL / HTML5 Canvas</option>
-                <option value="flask">Flask WSGI Cloud REST Service</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>GitHub Repository / Playable Build URL</label>
-              <input type="url" class="form-input" placeholder="https://github.com/yourhandle/game-repo" required />
-            </div>
-            <div class="form-group">
-              <label>Game Overview & Physics Specifications</label>
-              <textarea class="form-textarea" placeholder="Detail your frame rate loop, collision mechanics, and leaderboard cloud integration..." required></textarea>
-            </div>
-            <button type="submit" class="btn-get" style="margin-bottom: 0;">
-              Transmit Build for Verification
-            </button>
-          </form>
-
-          <!-- Developer Info Card -->
-          <div class="game-card">
-            <div class="card-image-wrap">
-              <span class="card-status-badge">DEVELOPER SDK</span>
-              <img src="BLOCKRUSH_GAME_INFO/Rectangle 2.png" alt="SDK Overview" class="card-image" />
-            </div>
-            <div class="card-body">
-              <h3 class="card-title">Integration Guidelines</h3>
-              <p class="card-desc">
-                Every release on ZeninXParth includes Neon PostgreSQL cloud sync, Google Firebase profile management, and 60 FPS performance profiling.
-              </p>
-            </div>
-            <div class="card-tags">
-              <span>SDK</span> <span>REST API</span> <span>NEON DB</span>
-            </div>
-            <button class="btn-get" onclick="showToast('Developer Starter Kit downloaded.')">
-              Download Dev SDK
-            </button>
-          </div>
         </div>
       </section>
 

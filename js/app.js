@@ -80,7 +80,7 @@ export function showToast(message) {
 window.showToast = showToast;
 
 // Initialize Application
-function initApp() {
+export function initApp() {
   renderExploreCards(gamesData);
   renderMarketplaceCards();
   renderUpcomingCards();
@@ -92,6 +92,7 @@ function initApp() {
   setupMobileToggle();
   setupSubmissionForm();
   setupContactForm();
+  setupDownloadGateModal();
 }
 
 // --------------------------------------------------------------------------
@@ -121,7 +122,6 @@ function setupNavigation() {
 export function navigateTo(viewName) {
   activeView = viewName;
 
-  // Update nav active styling
   navItems.forEach((btn) => {
     if (btn.getAttribute("data-view") === viewName) {
       btn.classList.add("active");
@@ -130,7 +130,6 @@ export function navigateTo(viewName) {
     }
   });
 
-  // Hide all views
   const allViews = [
     viewExplore, 
     viewGameDetail, 
@@ -144,7 +143,6 @@ export function navigateTo(viewName) {
     if (v) v.classList.remove("active-view");
   });
 
-  // Show target view
   const targetMap = {
     "explore": viewExplore,
     "game-detail": viewGameDetail,
@@ -160,7 +158,6 @@ export function navigateTo(viewName) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Close mobile sidebar if open
   if (sidebar && sidebar.classList.contains("open")) {
     sidebar.classList.remove("open");
   }
@@ -218,11 +215,9 @@ function renderExploreCards(games) {
       </div>
     `;
 
-    // Click on "Get" button opens detail view
     const getBtn = card.querySelector(".btn-get");
     getBtn.addEventListener("click", () => openGameDetail(game.id));
 
-    // Click on cover image opens detail view
     const imgWrap = card.querySelector(".card-image-wrap");
     imgWrap.addEventListener("click", () => openGameDetail(game.id));
 
@@ -239,44 +234,42 @@ export function openGameDetail(gameId) {
 
   currentGameId = gameId;
 
-  // Set Back Navigation Title
   if (detailBackTitle) detailBackTitle.textContent = game.title;
 
-  // Set Hero Banner
   if (detailBanner) {
     detailBanner.src = game.bannerImage;
     detailBanner.alt = game.title;
   }
 
-  // Set Stats
   if (detailStatDownloads) detailStatDownloads.textContent = game.downloads;
   if (detailStatViews) detailStatViews.textContent = game.views;
   if (detailStatRatings) detailStatRatings.textContent = game.ratingVal.toFixed(1);
 
-  // Set Tags
   if (detailTags) {
     detailTags.innerHTML = game.tags.map((t) => `<span>${t}</span>`).join(" &nbsp; ");
   }
 
-  // Set About Description
   if (detailAbout) detailAbout.textContent = game.about;
 
-  // Set Features List
   if (detailFeaturesList) {
     detailFeaturesList.innerHTML = game.features.map((f) => `<li>${f}</li>`).join("");
   }
 
-  // Set Action Buttons
-  if (detailDownloadBtn) {
-    detailDownloadBtn.href = game.links.download;
-    detailDownloadBtn.target = "_blank";
-  }
+  // Action Buttons: Play on Browser
   if (detailPlayBtn) {
     detailPlayBtn.href = game.links.browser;
     detailPlayBtn.target = "_blank";
   }
 
-  // Set Release Link Cards
+  // Action Buttons: Download (Gate with Google Authentication check!)
+  if (detailDownloadBtn) {
+    detailDownloadBtn.onclick = (e) => {
+      e.preventDefault();
+      handleGameDownload(game);
+    };
+  }
+
+  // Release Link Cards
   if (detailGithubLink) detailGithubLink.href = game.links.github;
   if (detailItchLink) detailItchLink.href = game.links.itch;
 
@@ -290,7 +283,65 @@ export function openGameDetail(gameId) {
 window.openGameDetail = openGameDetail;
 
 // --------------------------------------------------------------------------
-// Render Market Place Cards (Same Unified Gaming Card Theme)
+// Download Authentication Gate
+// Requirement: "जब तक user game download नहीं करता तब तक authentication मत मांगो"
+// --------------------------------------------------------------------------
+function handleGameDownload(game) {
+  const user = getCurrentUser();
+  if (user) {
+    // User already authenticated with Google
+    showToast(`Downloading ${game.title} release package...`);
+    window.open(game.links.download, "_blank");
+  } else {
+    // User not authenticated: trigger modal
+    const modal = document.getElementById("auth-modal");
+    const desc = document.getElementById("auth-modal-desc");
+    if (desc) {
+      desc.textContent = `Sign in with Google to download ${game.title} and automatically sync your high scores to Neon PostgreSQL global leaderboards.`;
+    }
+    if (modal) {
+      modal.style.display = "flex";
+
+      const btnGoogle = document.getElementById("modal-btn-google");
+      const btnGuest = document.getElementById("modal-btn-guest");
+
+      btnGoogle.onclick = async () => {
+        try {
+          await loginWithGoogle();
+          modal.style.display = "none";
+          showToast(`Welcome! Starting download for ${game.title}...`);
+          window.open(game.links.download, "_blank");
+        } catch (err) {
+          console.error("Auth error:", err);
+        }
+      };
+
+      btnGuest.onclick = () => {
+        modal.style.display = "none";
+        showToast(`Downloading ${game.title} as guest pilot...`);
+        window.open(game.links.download, "_blank");
+      };
+    } else {
+      window.open(game.links.download, "_blank");
+    }
+  }
+}
+
+function setupDownloadGateModal() {
+  const modal = document.getElementById("auth-modal");
+  const closeBtn = document.getElementById("auth-modal-close");
+  if (closeBtn && modal) {
+    closeBtn.onclick = () => {
+      modal.style.display = "none";
+    };
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  }
+}
+
+// --------------------------------------------------------------------------
+// Render Market Place Cards
 // --------------------------------------------------------------------------
 function renderMarketplaceCards() {
   const container = document.getElementById("marketplace-grid");
@@ -334,7 +385,7 @@ function renderMarketplaceCards() {
 }
 
 // --------------------------------------------------------------------------
-// Render Upcoming Games Cards (Same Unified Gaming Card Theme)
+// Render Upcoming Games Cards
 // --------------------------------------------------------------------------
 function renderUpcomingCards() {
   const container = document.getElementById("upcoming-grid");
@@ -651,5 +702,9 @@ function setupMobileToggle() {
   }
 }
 
-// Boot
-document.addEventListener("DOMContentLoaded", initApp);
+// Bulletproof Boot: Handle both loading state and already loaded state
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}

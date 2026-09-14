@@ -23,15 +23,14 @@
          ==================================================================== -->
     <aside class="sidebar">
       <!-- Brand Logo -->
-      <div class="brand-container" title="ZeninXParth Home">
+      <div class="brand-container" title="ZeninXParth Home" onclick="navigateTo('explore')">
         <img src="images/image 1.png" alt="Ghostofzenin" class="brand-logo-img" />
       </div>
 
       <!-- Navigation Tabs -->
       <nav class="sidebar-nav">
-        <button class="nav-item active" data-view="explore">
+        <button class="nav-item active" data-view="explore" onclick="navigateTo('explore')">
           <span class="nav-icon">
-            <!-- Explore / Compass Icon -->
             <svg viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" />
               <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
@@ -40,9 +39,8 @@
           <span>Explore</span>
         </button>
 
-        <button class="nav-item" data-view="marketplace">
+        <button class="nav-item" data-view="marketplace" onclick="navigateTo('marketplace')">
           <span class="nav-icon">
-            <!-- Market Place / Store Icon -->
             <svg viewBox="0 0 24 24">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
@@ -51,9 +49,8 @@
           <span>Market Place</span>
         </button>
 
-        <button class="nav-item" data-view="newgame">
+        <button class="nav-item" data-view="newgame" onclick="navigateTo('newgame')">
           <span class="nav-icon">
-            <!-- Game Controller / D-Pad Icon -->
             <svg viewBox="0 0 24 24">
               <rect x="2" y="6" width="20" height="12" rx="6" />
               <line x1="6" y1="12" x2="10" y2="12" />
@@ -65,9 +62,8 @@
           <span>New Game</span>
         </button>
 
-        <button class="nav-item" data-view="contact">
+        <button class="nav-item" data-view="contact" onclick="navigateTo('contact')">
           <span class="nav-icon">
-            <!-- Contact Us / At Mail Icon -->
             <svg viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="4" />
               <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94" />
@@ -76,9 +72,8 @@
           <span>Contact Us</span>
         </button>
 
-        <button class="nav-item" data-view="about">
+        <button class="nav-item" data-view="about" onclick="navigateTo('about')">
           <span class="nav-icon">
-            <!-- About Us / Info Icon -->
             <svg viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="16" x2="12" y2="12" />
@@ -88,9 +83,8 @@
           <span>About Us</span>
         </button>
 
-        <button class="nav-item" data-view="upcoming">
+        <button class="nav-item" data-view="upcoming" onclick="navigateTo('upcoming')">
           <span class="nav-icon">
-            <!-- Upcoming Games / Rocket Icon -->
             <svg viewBox="0 0 24 24">
               <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
               <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
@@ -102,7 +96,7 @@
         </button>
       </nav>
 
-      <!-- Sidebar Google Auth & Pilot Session HUD -->
+      <!-- Sidebar Google Auth Status HUD -->
       <div class="sidebar-footer">
         <div id="auth-card" class="auth-card" style="display: none;">
           <img id="auth-avatar" src="" alt="User Avatar" class="auth-avatar" />
@@ -130,10 +124,10 @@
          ==================================================================== -->
     <main class="main-content">
       
-      <!-- Top Header (Ghostofzenin Emblem, Search Bar, Quick Actions) -->
+      <!-- Top Header -->
       <header class="top-header">
         <div class="top-center-brand">
-          <img src="images/image 6.png" alt="Ghostofzenin Emblem" class="top-center-emblem" onerror="this.src='images/image 1.png'" />
+          <img src="images/image 6.png" alt="Ghostofzenin Emblem" class="top-center-emblem" onerror="this.src='images/image 1.png'" onclick="navigateTo('explore')" />
         </div>
 
         <div class="search-and-actions-bar">
@@ -160,7 +154,7 @@
             />
           </div>
 
-          <!-- Header Action Icons (Filter & Notifications) -->
+          <!-- Header Action Icons -->
           <div class="header-actions">
             <button class="action-icon-btn" title="Filter releases" onclick="showToast('Filtering active: Sorted by latest release & community rating.')">
               <svg viewBox="0 0 24 24">
@@ -189,6 +183,7 @@
 
       <!-- ================================================================
            VIEW 1: EXPLORE / LATEST RELEASE (Figma Frame 1 / Node 750:3)
+           Pre-rendered HTML for instant display!
            ================================================================ -->
       <section id="view-explore" class="view-container active-view">
         <div class="section-header-row">
@@ -197,7 +192,65 @@
 
         <!-- Interactive Cards Grid for Games -->
         <div id="games-grid" class="games-cards-grid">
-          <!-- Populated by js/app.js -->
+          
+          <!-- Card 1: BlockRush 2048 -->
+          <article class="game-card" data-id="blockrush">
+            <div class="card-image-wrap" style="cursor: pointer;" onclick="openGameDetail('blockrush')">
+              <span class="card-status-badge">LIVE RELEASE</span>
+              <img src="BLOCKRUSH_GAME_INFO/Rectangle 2.png" alt="BlockRush" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">BlockRush</h3>
+              <p class="card-desc">2048 Advanced Python Game developed for Mathematics And Calculative Coders.</p>
+            </div>
+            <div class="card-tags">
+              <span>PUZZLE</span> <span>BLOCK GAME</span> <span>MATH</span>
+            </div>
+            <button class="btn-get" data-game-id="blockrush" onclick="openGameDetail('blockrush')">
+              Get
+            </button>
+            <div class="card-platform-badges">
+              <div class="badge-item" title="Ghostofzenin Native">
+                <img src="images/image 6.png" alt="Ghostofzenin" onerror="this.src='images/image 1.png'" />
+              </div>
+              <div class="badge-item" title="itch.io Release">
+                <img src="images/image 7.png" alt="itch.io" onerror="this.src='images/image 4.png'" />
+              </div>
+              <div class="badge-item" title="Render Cloud Production">
+                <img src="images/image 8.png" alt="Render" onerror="this.src='images/image 1.png'" />
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Meteor Dodge -->
+          <article class="game-card" data-id="meteor-dodge">
+            <div class="card-image-wrap" style="cursor: pointer;" onclick="openGameDetail('meteor-dodge')">
+              <span class="card-status-badge">LIVE RELEASE</span>
+              <img src="METEOR_DODGE_info/Rectangle 7.png" alt="Meteor dodge" class="card-image" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Meteor dodge</h3>
+              <p class="card-desc">Meteor Space Dodge is a 2D arcade survival game built with Python and Pygame.</p>
+            </div>
+            <div class="card-tags">
+              <span>ARCADE</span> <span>SPACE</span> <span>SURVIVAL</span>
+            </div>
+            <button class="btn-get" data-game-id="meteor-dodge" onclick="openGameDetail('meteor-dodge')">
+              Get
+            </button>
+            <div class="card-platform-badges">
+              <div class="badge-item" title="Ghostofzenin Native">
+                <img src="images/image 6.png" alt="Ghostofzenin" onerror="this.src='images/image 1.png'" />
+              </div>
+              <div class="badge-item" title="itch.io Release">
+                <img src="images/image 7.png" alt="itch.io" onerror="this.src='images/image 4.png'" />
+              </div>
+              <div class="badge-item" title="Render Cloud Production">
+                <img src="images/image 8.png" alt="Render" onerror="this.src='images/image 1.png'" />
+              </div>
+            </div>
+          </article>
+
         </div>
       </section>
 
@@ -207,7 +260,7 @@
       <section id="view-game-detail" class="view-container game-detail-view">
         
         <!-- Back Navigation Header -->
-        <div id="detail-back-btn" class="detail-back-header">
+        <div id="detail-back-btn" class="detail-back-header" onclick="navigateTo('explore')">
           <svg class="detail-back-icon" viewBox="0 0 24 24">
             <line x1="19" y1="12" x2="5" y2="12" />
             <polyline points="12 19 5 12 12 5" />
@@ -224,15 +277,15 @@
         <div class="detail-stats-bar">
           <div class="stat-item">
             <span class="stat-label">Downloads</span>
-            <span id="stat-downloads-val" class="stat-value">--</span>
+            <span id="stat-downloads-val" class="stat-value">1.4k+</span>
           </div>
           <div class="stat-item">
             <span class="stat-label">Views</span>
-            <span id="stat-views-val" class="stat-value">--</span>
+            <span id="stat-views-val" class="stat-value">12.8k+</span>
           </div>
           <div class="stat-item">
             <span class="stat-label">Ratings</span>
-            <span id="stat-ratings-val" class="stat-value">--</span>
+            <span id="stat-ratings-val" class="stat-value">4.9</span>
           </div>
         </div>
 
@@ -243,7 +296,7 @@
             <span>PUZZLE</span> &nbsp; <span>BLOCK GAME</span> &nbsp; <span>MATH</span>
           </div>
           <p id="detail-about" class="detail-description-text">
-            BlockRush 2048 reimagines the classic mathematical sliding tile puzzle into an exhilarating, competitive cyber-arcade experience.
+            BlockRush 2048 reimagines the classic mathematical sliding tile puzzle into an exhilarating, competitive cyber-arcade experience. Featuring dark glassmorphism aesthetics, dynamic board scaling from 2x2 up to 12x12, real-time Firebase Authentication, cross-platform cloud score persistence via Neon PostgreSQL, and competitive tier rankings.
           </p>
 
           <!-- Key Features Highlights from README -->
@@ -255,22 +308,27 @@
               Key Architecture & Engine Features
             </h3>
             <ul id="detail-features-list" class="features-list">
-              <!-- Dynamically populated from README -->
+              <li>Dynamic Grid Sizes (2x2 up to 12x12) with adaptive tile fonts and responsive spacing</li>
+              <li>Sleek Cyberpunk UI / Glassmorphism with neon accents (#6366F1, #EC4899, #10B981)</li>
+              <li>Competitive Progression & Rank Tiers from Bronze (0-999) to Immortal (50,000+)</li>
+              <li>Dual Auth (Google & Email/Password) via Firebase Authentication</li>
+              <li>Robust Cloud Sync powered by Neon Serverless PostgreSQL with local JSON fallback</li>
+              <li>Fluid 60 FPS animations and synthesized dynamic SFX engine</li>
             </ul>
           </div>
 
           <!-- Action Buttons: Download & Play on Browser -->
           <div class="detail-action-buttons">
-            <a id="detail-download-btn" href="#" target="_blank" class="btn-detail-action">
+            <button id="detail-download-btn" class="btn-detail-action">
               <svg viewBox="0 0 24 24">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
               Download
-            </a>
+            </button>
 
-            <a id="detail-play-btn" href="#" target="_blank" class="btn-detail-action">
+            <a id="detail-play-btn" href="https://blockrush-2048.onrender.com/" target="_blank" class="btn-detail-action">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" />
                 <line x1="2" y1="12" x2="22" y2="12" />
@@ -355,7 +413,6 @@
         <div class="detail-section">
           <h2 class="detail-section-title">Comments</h2>
           
-          <!-- Input Capsule (Figma Node 763:380 / 763:381) -->
           <div class="comments-input-capsule">
             <input 
               type="text" 
@@ -368,15 +425,14 @@
             </button>
           </div>
 
-          <!-- Comments Feed -->
           <div id="comments-feed" class="comments-feed">
-            <!-- Dynamic comments rendered by js/app.js -->
+            <!-- Dynamic comments -->
           </div>
         </div>
       </section>
 
       <!-- ================================================================
-           VIEW: MARKET PLACE (Unified Gaming Cards Theme)
+           VIEW: MARKET PLACE
            ================================================================ -->
       <section id="view-marketplace" class="view-container">
         <div class="section-header-row">
@@ -386,12 +442,12 @@
           Acquire exclusive cyberpunk themes, spaceship hulls, and synthwave soundtrack packages crafted for ZeninXParth releases.
         </p>
         <div id="marketplace-grid" class="games-cards-grid">
-          <!-- Dynamically populated with identical gaming card theme -->
+          <!-- Dynamically populated -->
         </div>
       </section>
 
       <!-- ================================================================
-           VIEW: NEW GAME (Developer Submission Portal)
+           VIEW: NEW GAME
            ================================================================ -->
       <section id="view-newgame" class="view-container">
         <div class="section-header-row">
@@ -455,7 +511,7 @@
       </section>
 
       <!-- ================================================================
-           VIEW: CONTACT US (Transmission Terminal)
+           VIEW: CONTACT US
            ================================================================ -->
       <section id="view-contact" class="view-container">
         <div class="section-header-row">
@@ -507,10 +563,10 @@
             <div class="card-tags">
               <span>GITHUB</span> <span>ITCH.IO</span> <span>RENDER</span>
             </div>
-            <a href="https://github.com/Ghostofzenin08" target="_blank" class="btn-get" style="text-decoration: none;">
+            <a href="https://github.com/Ghostofzenin08" target="_blank" class="btn-get">
               Visit Ghostofzenin08
             </a>
-            <a href="https://github.com/parthongit89" target="_blank" class="btn-get" style="background: transparent; border: 1.5px solid var(--accent-red); text-decoration: none;">
+            <a href="https://github.com/parthongit89" target="_blank" class="btn-get" style="background: transparent; border: 1.5px solid var(--accent-red);">
               Visit Parthongit89
             </a>
           </div>
@@ -518,7 +574,7 @@
       </section>
 
       <!-- ================================================================
-           VIEW: ABOUT US (Studio Story, Specs & Team)
+           VIEW: ABOUT US
            ================================================================ -->
       <section id="view-about" class="view-container">
         <div class="section-header-row">
@@ -591,7 +647,6 @@
           </article>
         </div>
 
-        <!-- Architectural Overview Card -->
         <div class="contact-form-card" style="max-width: 100%;">
           <h3 style="font-size: 24px; color: var(--accent-red); margin-bottom: 8px;">Prompt Engineering & Architectural Standard</h3>
           <p style="color: var(--text-white-85); line-height: 1.6; font-size: 15px;">
@@ -601,7 +656,7 @@
       </section>
 
       <!-- ================================================================
-           VIEW: UPCOMING GAMES (Unified Gaming Cards Theme)
+           VIEW: UPCOMING GAMES
            ================================================================ -->
       <section id="view-upcoming" class="view-container">
         <div class="section-header-row">
@@ -611,12 +666,59 @@
           Next-generation indie titles currently in development at ZeninXParth labs. Pre-register for priority beta access.
         </p>
         <div id="upcoming-grid" class="games-cards-grid">
-          <!-- Dynamically populated with identical gaming card theme -->
+          <!-- Dynamically populated -->
         </div>
       </section>
 
     </main>
   </div>
+
+  <!-- ====================================================================
+       AUTHENTICATION GATE MODAL (Triggered ONLY when user clicks Download)
+       ==================================================================== -->
+  <div id="auth-modal" class="auth-modal-overlay" style="display: none;">
+    <div class="auth-modal-box">
+      <button id="auth-modal-close" class="auth-modal-close" aria-label="Close">&times;</button>
+      <div class="auth-modal-icon">
+        <img src="images/image 6.png" alt="Zenin Emblem" onerror="this.src='images/image 1.png'" />
+      </div>
+      <h3 class="auth-modal-title">Sign in to Download</h3>
+      <p id="auth-modal-desc" class="auth-modal-desc">
+        Sign in with your Google account to download this release and automatically sync your high scores to Neon PostgreSQL global leaderboards.
+      </p>
+      <div class="auth-modal-actions">
+        <button id="modal-btn-google" class="btn-detail-action" style="width: 100%; height: 50px; font-size: 16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+          </svg>
+          Sign in with Google
+        </button>
+        <button id="modal-btn-guest" class="btn-sidebar-auth secondary" style="width: 100%; padding: 12px;">
+          Continue as Guest Download
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fast Inline Fallback to ensure instant interactivity -->
+  <script>
+    function navigateTo(viewName) {
+      const allViews = document.querySelectorAll('.view-container');
+      allViews.forEach(v => v.classList.remove('active-view'));
+      const target = document.getElementById('view-' + viewName);
+      if (target) {
+        target.classList.add('active-view');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(n => {
+        if (n.getAttribute('data-view') === viewName) n.classList.add('active');
+        else n.classList.remove('active');
+      });
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar) sidebar.classList.remove('open');
+    }
+  </script>
 
   <!-- Main JavaScript Module -->
   <script type="module" src="js/app.js"></script>

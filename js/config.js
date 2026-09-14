@@ -1,21 +1,37 @@
 // ZeninXParth Firebase & App Configuration
 let dynamicConfig = {
   apiKey: "your_api_key_here",
-  authDomain: "your_project_id.firebaseapp.com",
-  projectId: "your_project_id",
-  storageBucket: "your_project_id.firebasestorage.app",
-  messagingSenderId: "your_messaging_sender_id",
-  appId: "your_app_id",
-  measurementId: "your_measurement_id"
+  authDomain: "ghostofzenin.firebaseapp.com",
+  projectId: "ghostofzenin",
+  storageBucket: "ghostofzenin.firebasestorage.app",
+  messagingSenderId: "241503300378",
+  appId: "1:241503300378:web:07764552638aa1073f1aa3",
+  measurementId: "G-1XXDEPXNQP"
 };
 
+// 1. Try loading from local git-ignored env.js (for local development)
 try {
   const localEnv = await import("./env.js");
   if (localEnv && localEnv.firebaseConfig) {
-    dynamicConfig = localEnv.firebaseConfig;
+    dynamicConfig = { ...dynamicConfig, ...localEnv.firebaseConfig };
   }
 } catch (e) {
   // env.js is not present in repo / production builds
+}
+
+// 2. If running on Vercel, fetch from serverless endpoint /api/config
+if (!dynamicConfig.apiKey || dynamicConfig.apiKey === "your_api_key_here") {
+  try {
+    const res = await fetch("/api/config");
+    if (res.ok) {
+      const serverConfig = await res.json();
+      if (serverConfig && serverConfig.apiKey) {
+        dynamicConfig = { ...dynamicConfig, ...serverConfig };
+      }
+    }
+  } catch (e) {
+    // local offline or non-vercel host
+  }
 }
 
 export const firebaseConfig = dynamicConfig;

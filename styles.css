@@ -1339,6 +1339,289 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
+   COMING SOON CYBER CARDS (MarketPlace, New Game, Upcoming Games)
+   -------------------------------------------------------------------------- */
+.coming-soon-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--border-cyber);
+  border-radius: 16px;
+  padding: 60px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 760px;
+  margin: 30px auto 50px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 2, 7, 0.18);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.coming-soon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+  box-shadow: 0 0 12px var(--accent-red);
+}
+
+.coming-soon-card:hover {
+  border-color: rgba(255, 2, 7, 0.85);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 40px var(--accent-red-glow);
+}
+
+.coming-soon-radar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(255, 2, 7, 0.08);
+  border: 1.5px solid rgba(255, 2, 7, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: 0 0 24px rgba(255, 2, 7, 0.25);
+}
+
+.radar-circle {
+  position: absolute;
+  inset: -6px;
+  border: 1px dashed rgba(255, 2, 7, 0.4);
+  border-radius: 50%;
+  animation: radarSpin 8s linear infinite;
+}
+
+@keyframes radarSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.coming-soon-icon {
+  width: 42px;
+  height: 42px;
+  stroke: var(--accent-red);
+  stroke-width: 2;
+  fill: none;
+  filter: drop-shadow(0 0 10px var(--accent-red-glow));
+}
+
+.coming-soon-badge {
+  background: rgba(255, 2, 7, 0.12);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+  box-shadow: 0 0 12px rgba(255, 2, 7, 0.3);
+}
+
+.coming-soon-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+  text-shadow: 0 0 24px var(--accent-red-glow);
+}
+
+.coming-soon-desc {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-white-85);
+  max-width: 580px;
+}
+
+/* --------------------------------------------------------------------------
+   ABOUT US - STRUCTURED SECTIONS (Developers, Roles, Platform, Reason)
+   -------------------------------------------------------------------------- */
+.about-section-heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-top: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: -0.3px;
+}
+
+.heading-accent {
+  color: var(--accent-red);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.about-roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+.about-role-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--border-cyber);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: var(--shadow-gaming-sm);
+  transition: var(--transition-smooth);
+}
+
+.about-role-card:hover {
+  border-color: rgba(255, 2, 7, 0.7);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gaming-md);
+}
+
+.about-role-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 2, 7, 0.2);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about-role-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.about-role-tag {
+  background: rgba(255, 2, 7, 0.12);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.about-role-duties {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-role-duties li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  color: var(--text-white-85);
+  line-height: 1.55;
+}
+
+.about-role-duties li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-red);
+  font-weight: bold;
+}
+
+.about-role-duties strong {
+  color: var(--text-white);
+}
+
+.about-info-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--border-cyber);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: var(--shadow-gaming-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-info-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-white-85);
+}
+
+.about-platform-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.highlight-item {
+  background: rgba(255, 2, 7, 0.05);
+  border: 1px solid rgba(255, 2, 7, 0.3);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.highlight-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-red);
+  text-shadow: 0 0 12px var(--accent-red-glow);
+}
+
+.highlight-lbl {
+  font-size: 13px;
+  color: var(--text-white-85);
+  line-height: 1.4;
+}
+
+.about-reasons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reason-block {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--accent-red);
+  padding: 16px 20px;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reason-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.reason-desc {
+  font-size: 14px;
+  color: var(--text-white-85);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
    CYBER TOAST NOTIFICATION HUD
    -------------------------------------------------------------------------- */
 .cyber-toast-container {

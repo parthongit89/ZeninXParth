@@ -49,7 +49,7 @@
           <span>Market Place</span>
         </button>
 
-        <button class="nav-item" data-view="newgame" onclick="openGameDetail('blockrush')">
+        <button class="nav-item" data-view="newgame" onclick="navigateTo('newgame')">
           <span class="nav-icon">
             <svg viewBox="0 0 24 24">
               <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -441,8 +441,49 @@
         <p class="section-subtitle">
           Acquire exclusive cyberpunk themes, spaceship hulls, and synthwave soundtrack packages crafted for ZeninXParth releases.
         </p>
-        <div id="marketplace-grid" class="games-cards-grid">
-          <!-- Dynamically populated -->
+        <div class="coming-soon-card">
+          <div class="coming-soon-radar">
+            <span class="radar-circle"></span>
+            <svg class="coming-soon-icon" viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </div>
+          <span class="coming-soon-badge">TRANSMISSION ACTIVE</span>
+          <h2 class="coming-soon-title">Coming Soon</h2>
+          <p class="coming-soon-desc">
+            The ZeninXParth Asset & Marketplace Store is currently in engineering staging. Verified sound packs, custom spaceship skins, and high-FPS arcade shader modules will be unlocked soon.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: NEW GAME
+           ================================================================ -->
+      <section id="view-newgame" class="view-container">
+        <div class="section-header-row">
+          <h1 class="section-title">New Game</h1>
+        </div>
+        <p class="section-subtitle">
+          Next-generation indie titles and developer deployment launchpad.
+        </p>
+        <div class="coming-soon-card">
+          <div class="coming-soon-radar">
+            <span class="radar-circle"></span>
+            <svg class="coming-soon-icon" viewBox="0 0 24 24">
+              <rect x="2" y="6" width="20" height="12" rx="6" />
+              <line x1="6" y1="12" x2="10" y2="12" />
+              <line x1="8" y1="10" x2="8" y2="14" />
+              <circle cx="15" cy="11" r="1" />
+              <circle cx="18" cy="13" r="1" />
+            </svg>
+          </div>
+          <span class="coming-soon-badge">DEVELOPMENT PIPELINE</span>
+          <h2 class="coming-soon-title">Coming Soon</h2>
+          <p class="coming-soon-desc">
+            The ZeninXParth Game Launchpad & Submission Console is under active development. Upcoming game builds, closed alpha testing slots, and verified developer uploads are launching soon.
+          </p>
         </div>
       </section>
 
@@ -517,15 +558,18 @@
           <h1 class="section-title">About ZeninXParth</h1>
         </div>
         <p class="section-subtitle">
-          The collaborative indie engineering initiative merging high-performance game loops with serverless cloud architectures.
+          The collaborative indie engineering initiative merging high-performance deterministic game loops with serverless cloud architectures.
         </p>
 
-        <!-- Studio Cards Grid -->
+        <!-- 1. Existing Developers -->
+        <h2 class="about-section-heading">
+          <span class="heading-accent">01.</span> Existing Developers
+        </h2>
         <div class="games-cards-grid" style="margin-bottom: 40px;">
           <!-- Dev 1 Card -->
           <article class="game-card">
             <div class="card-image-wrap">
-              <span class="card-status-badge">FOUNDER & DEV</span>
+              <span class="card-status-badge">FOUNDER & LEAD DEV</span>
               <img src="BLOCKRUSH_GAME_INFO/Rectangle 2.png" alt="Harshal Sonawane" class="card-image" />
             </div>
             <div class="card-body">
@@ -535,17 +579,17 @@
               </p>
             </div>
             <div class="card-tags">
-              <span>GAME DEV</span> <span>GRAPHICS</span> <span>LOGISTICS</span>
+              <span>GAME ARCHITECT</span> <span>GRAPHICS</span> <span>ANALYTICS</span>
             </div>
             <a href="https://github.com/Ghostofzenin08" target="_blank" class="btn-get">
-              Explore GitHub Repository
+              Explore GitHub Profile
             </a>
           </article>
 
           <!-- Dev 2 Card -->
           <article class="game-card">
             <div class="card-image-wrap">
-              <span class="card-status-badge">CO-FOUNDER & DEV</span>
+              <span class="card-status-badge">CO-FOUNDER & LEAD DEV</span>
               <img src="METEOR_DODGE_info/Rectangle 7.png" alt="Parth Sonavane" class="card-image" />
             </div>
             <div class="card-body">
@@ -555,19 +599,96 @@
               </p>
             </div>
             <div class="card-tags">
-              <span>FRONTEND</span> <span>BACKEND</span> <span>DEPLOYMENT</span>
+              <span>FULL-STACK</span> <span>CLOUD ARCHITECT</span> <span>DATABASE</span>
             </div>
             <a href="https://github.com/parthongit89" target="_blank" class="btn-get">
-              Explore GitHub Repository
+              Explore GitHub Profile
             </a>
           </article>
         </div>
 
-        <div class="contact-form-card" style="max-width: 100%;">
-          <h3 style="font-size: 24px; color: var(--accent-red); margin-bottom: 8px;">Prompt Engineering & Architectural Standard</h3>
-          <p style="color: var(--text-white-85); line-height: 1.6; font-size: 15px;">
-            Standardized per the <a href="https://github.com/parthongit89/Project-Strategies-Prompt-engineering-" target="_blank" style="color: var(--accent-red); font-weight: 600; text-decoration: underline;">Full Stack Prompt Engineering Specification</a>. Every game release utilizes dual platform distribution: instant in-browser WebGL client with cloud sync, accompanied by standalone high-performance compiled Windows executables.
+        <!-- 2. Roles of Developers -->
+        <h2 class="about-section-heading">
+          <span class="heading-accent">02.</span> Roles of Developers
+        </h2>
+        <div class="about-roles-grid" style="margin-bottom: 40px;">
+          <div class="about-role-card">
+            <div class="about-role-header">
+              <h3 class="about-role-title">Harshal Sonawane</h3>
+              <span class="about-role-tag">Lead Game Architect</span>
+            </div>
+            <ul class="about-role-duties">
+              <li><strong>Physics & Game Loop Design:</strong> Designing 60 FPS deterministic collision algorithms, coordinate boundary handling, and mathematics-driven puzzle loops.</li>
+              <li><strong>Graphics & Asset Pipeline:</strong> Directing visual aesthetic, custom typography tokens, animated sprite states, and retro cyberpunk UI assets.</li>
+              <li><strong>Gameplay Pacing & Analytics:</strong> Tuning progressive game speed curves, difficulty scaling matrices, and player retention mechanics.</li>
+            </ul>
+          </div>
+
+          <div class="about-role-card">
+            <div class="about-role-header">
+              <h3 class="about-role-title">Parth Sonavane</h3>
+              <span class="about-role-tag">Full-Stack Cloud Architect</span>
+            </div>
+            <ul class="about-role-duties">
+              <li><strong>Cloud & Deployment Engineering:</strong> Architecting Vercel serverless functions, Render production hosting pipelines, and CI/CD git workflows.</li>
+              <li><strong>Database & Authentication:</strong> Implementing Neon Serverless PostgreSQL persistence, connection pooling, and Google OAuth via Firebase v10.</li>
+              <li><strong>Frontend Architecture:</strong> Building high-speed, zero-build-overhead responsive user interfaces adhering to strict Figma design systems.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Information about the Platform -->
+        <h2 class="about-section-heading">
+          <span class="heading-accent">03.</span> Information About The Platform
+        </h2>
+        <div class="about-info-card" style="margin-bottom: 40px;">
+          <p class="about-info-text">
+            <strong>ZeninXParth</strong> is a dedicated indie game engineering platform and arcade distribution portal. It represents the shared laboratory of developers Harshal Sonawane and Parth Sonavane, unifying standalone arcade video games, browser-based WebGL deployments, and serverless telemetry in one unified dark-mode cyberpunk interface.
           </p>
+          <div class="about-platform-highlights">
+            <div class="highlight-item">
+              <span class="highlight-num">60 FPS</span>
+              <span class="highlight-lbl">Deterministic Native Python & WebGL Engines</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-num">Serverless</span>
+              <span class="highlight-lbl">Neon PostgreSQL Cloud Telemetry</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-num">Zero-Friction</span>
+              <span class="highlight-lbl">Universal Dual-Mode Distribution</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Reason for that Platform -->
+        <h2 class="about-section-heading">
+          <span class="heading-accent">04.</span> Reason For That Platform
+        </h2>
+        <div class="about-info-card" style="margin-bottom: 40px;">
+          <p class="about-info-text">
+            The ZeninXParth platform was architected to address three critical challenges in independent game distribution and modern software engineering:
+          </p>
+          <div class="about-reasons-list">
+            <div class="reason-block">
+              <h4 class="reason-title">1. Dual Platform Distribution Without Barriers</h4>
+              <p class="reason-desc">
+                Traditional indie games force players to choose between low-fidelity web ports or heavy executable installations. ZeninXParth solves this with a unified dual distribution model: instant zero-install browser play via WebGL alongside high-performance compiled Windows binaries.
+              </p>
+            </div>
+            <div class="reason-block">
+              <h4 class="reason-title">2. Unified Cloud Telemetry for Offline Games</h4>
+              <p class="reason-desc">
+                Offline retro arcade games typically suffer from isolated local scores. ZeninXParth connects native offline loops with Neon Serverless PostgreSQL and Firebase OAuth, providing real-time global high scores and player identity without requiring massive backend servers.
+              </p>
+            </div>
+            <div class="reason-block">
+              <h4 class="reason-title">3. Standardized Full-Stack Prompt Engineering</h4>
+              <p class="reason-desc">
+                Standardized per the <a href="https://github.com/parthongit89/Project-Strategies-Prompt-engineering-" target="_blank" style="color: var(--accent-red); font-weight: 600; text-decoration: underline;">Project Strategies Prompt Engineering Specification</a>, demonstrating that sophisticated, production-grade indie titles and portals can be built with pure HTML5, CSS3, and JavaScript with zero build-step overhead.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -579,10 +700,23 @@
           <h1 class="section-title">Upcoming Games</h1>
         </div>
         <p class="section-subtitle">
-          Next-generation indie titles currently in development at ZeninXParth labs. Pre-register for priority beta access.
+          Next-generation indie titles currently in development at ZeninXParth labs.
         </p>
-        <div id="upcoming-grid" class="games-cards-grid">
-          <!-- Dynamically populated -->
+        <div class="coming-soon-card">
+          <div class="coming-soon-radar">
+            <span class="radar-circle"></span>
+            <svg class="coming-soon-icon" viewBox="0 0 24 24">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+              <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            </svg>
+          </div>
+          <span class="coming-soon-badge">STAGING TRANSMISSION</span>
+          <h2 class="coming-soon-title">Coming soon.</h2>
+          <p class="coming-soon-desc">
+            Next-generation indie titles currently in development at ZeninXParth labs. Pre-register your frequency to receive instant alert transmissions upon public beta launch.
+          </p>
         </div>
       </section>
 
